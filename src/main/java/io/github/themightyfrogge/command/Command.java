@@ -75,10 +75,11 @@ public abstract class Command {
         getSubCommand(handle).setAccessible(true);
         try {
             getSubCommand(handle).invoke(CommandManager.getInstance().getCommand(getHandle()));
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     /**
