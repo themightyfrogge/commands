@@ -6,7 +6,7 @@
 
   <groupId>io.github.themightyfrogge</groupId>
   <artifactId>commands</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1.0-ALPHA</version>
 
   <name>commands</name>
 
