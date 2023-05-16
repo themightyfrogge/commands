@@ -40,7 +40,7 @@ Maven users:
 Gradle (Groovy) users:
 ```gradle
 dependencies {
-    implementation 'com.github.themightyfrogge:commands:Tag'
+    implementation 'com.github.themightyfrogge:commands:v0.1.0-ALPHA'
 }
 ```
 
