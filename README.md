@@ -3,8 +3,47 @@ A light-weight Bukkit/Spigot command manager that supports annotation-based sub-
 
 This project was made so I can improve on my Java & programming skills in general, so please, point out my mistakes.
 
-# Adding the repository
-For now, you can't add the repository through JitPack, and would have to do it manually.
+# Adding the repository (JitPack)
+You need to have JitPack in your project:
+
+Maven users:
+```xml
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+Gradle (Groovy) users:
+```gradle
+allprojects {
+	repositories {
+		...
+	    maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+After that, you need to add the dependency:
+
+Maven users:
+```xml
+<dependency>
+    <groupId>com.github.themightyfrogge</groupId>
+	<artifactId>commands</artifactId>
+	<version>v0.1.0-ALPHA</version>
+</dependency>
+```
+
+Gradle (Groovy) users:
+```gradle
+dependencies {
+    implementation 'com.github.themightyfrogge:commands:Tag'
+}
+```
+
 
 # Making the CommandManager instance
 In order for the command manager to work, you need to use ``CommandManager.makeInstance(/*Your main instance*/)`` in your onEnable() method.
