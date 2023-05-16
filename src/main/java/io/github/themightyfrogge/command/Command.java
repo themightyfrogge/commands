@@ -59,7 +59,7 @@ public abstract class Command {
                 execution();
                 return true;
             }
-            if(!executeSubCommand(handle)) // Else we try to execute the correct sub-command, if the sub-command isn't found, we send the user an error. 
+            if(!executeSubCommand(params[0])) // Else we try to execute the correct sub-command, if the sub-command isn't found, we send the user an error. 
                 sender.sendMessage("It appears that the sub-command you're looking for doesn't exist!"); 
             return true;
         });
