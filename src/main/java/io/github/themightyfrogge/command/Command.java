@@ -55,8 +55,10 @@ public abstract class Command {
 
         this.executor = ((sender, command, label, params) -> {
             if(!CommandExecutorTest.performExecutorTest(sender, this)) return false; // If test is failed, we immediately stop the command execution.
-            if(!(params.length > 0)) // If command is sent without arguments we invoke execution().
+            if(!(params.length > 0)) { // If command is sent without arguments we invoke execution().
                 execution();
+                return true;
+            }
             if(!executeSubCommand(handle)) // Else we try to execute the correct sub-command, if the sub-command isn't found, we send the user an error. 
                 sender.sendMessage("It appears that the sub-command you're looking for doesn't exist!"); 
             return true;
