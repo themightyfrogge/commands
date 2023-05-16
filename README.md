@@ -44,6 +44,45 @@ dependencies {
 }
 ```
 
+You also need to shade the jar, if you don't do that already, follow these instructions:
+
+Maven users:
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+Gradle (Groovy) users:
+```gradle
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+shadowJar {
+    ...
+    dependencies {
+        compile 'com.github.themightyfrogge:commands:v0.1.0-ALPHA'
+    }
+    ...
+}
+
+jar.finalizedBy(shadowJar)
+```
 
 # Making the CommandManager instance
 In order for the command manager to work, you need to use ``CommandManager.makeInstance(/*Your main instance*/)`` in your onEnable() method.
