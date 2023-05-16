@@ -13,8 +13,8 @@ public class ReflectionUtil {
         final List<Method> methods = new ArrayList<Method>();
         Class<?> klass = type;
         for (Method method : klass.getDeclaredMethods()) {
-            if (!method.isAnnotationPresent(SubCommand.class)) break;
-            methods.add(method);
+            if (method.isAnnotationPresent(SubCommand.class))
+                methods.add(method);
         }
         return methods;
     }
