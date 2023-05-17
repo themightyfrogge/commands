@@ -132,7 +132,7 @@ public class DemoCommand extends Command {
 ```
 
 # Registering commands
-It's straight forward just add your command to the CommandManager's registeredCommands list.
+It's straight forward just add your command to the CommandManager's registeredCommands list, and load all the commands.
 For example:
 ```java
 /*in onEnable()'s scope*/
@@ -141,5 +141,7 @@ CommandManager.getInstance().getRegisteredCommands().addAll(
         new DemoCommand()
     )
 );
+
+CommandManager.getInstance().loadCommands();
 ```
 That's all. Just don't forget to add your command to your plugin.yml before going to test it!
