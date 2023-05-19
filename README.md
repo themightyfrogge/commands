@@ -33,14 +33,14 @@ Maven users:
 <dependency>
     <groupId>com.github.themightyfrogge</groupId>
 	<artifactId>commands</artifactId>
-	<version>v0.1.0-ALPHA</version>
+	<version>v0.1.1-ALPHA</version>
 </dependency>
 ```
 
 Gradle (Groovy) users:
 ```gradle
 dependencies {
-    implementation 'com.github.themightyfrogge:commands:v0.1.0-ALPHA'
+    implementation 'com.github.themightyfrogge:commands:v0.1.1-ALPHA'
 }
 ```
 
@@ -99,12 +99,12 @@ The demo command is also available in source in commands/plugincommands
 public class DemoCommand extends Command {
 
     public DemoCommand() {
-        super("demo", "io.github.themightyfrogge.admin.demo", CommandExecutorType.CONSOLE);
+        super("demo", "frogge.admin.demo", CommandExecutorType.CONSOLE);
     }
 
     @Override
     public void execution() {
-        getSender().sendMessage("This is a demo for io.github.themightyfrogge's command manager!");
+        getSender().sendMessage("This is a demo for themightyfrogge's command manager!");
     }
     
     @SubCommand(handle = "info")
