@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public abstract class Command {
@@ -28,9 +29,6 @@ public abstract class Command {
     /** All the sub-commands that the parent needs to run correctly */
     private final List<Method> subCommands;
 
-    /** The type of user who's allowed to execute the command */
-    private final CommandExecutorType allowedExecutor;
-    
     /** Bukkit's CommandExecutor interface */
     private final CommandExecutor executor;
 
@@ -39,6 +37,8 @@ public abstract class Command {
     /** Parameters (I.E. Arguments) for access in sub-commands. */
     private String[] parameters;
 
+    @Setter private CommandProperties properties;
+    
     /**
      * Contructs a basic command.
      * @param handle (I.E. the name of the command.)
@@ -46,21 +46,21 @@ public abstract class Command {
      * @param max_arguments (The maximum amount of usable arguments.)
      * @param allowedExecutor (The type of intended user.)
      */
-    public Command(String handle, String permission, CommandExecutorType allowedExecutor) {
+    public Command(String handle, String permission) {
         this.handle = handle;
         this.permission = permission;
         this.max_arguments = 0; // Not implemented, for now...
-        this.allowedExecutor = allowedExecutor;
         this.subCommands = new ArrayList<>();
-
+        
         this.executor = ((sender, command, label, params) -> {
             if(!CommandExecutorTest.performExecutorTest(sender, this)) return false; // If test is failed, we immediately stop the command execution.
-            if(!(params.length > 0)) { // If command is sent without arguments we invoke execution().
+            if(params.length == 0) { // If command is sent without arguments we invoke execution().
                 execution();
                 return true;
             }
-            if(!executeSubCommand(params[0])) // Else we try to execute the correct sub-command, if the sub-command isn't found, we send the user an error. 
-                sender.sendMessage("It appears that the sub-command you're looking for doesn't exist!"); 
+            
+            if(!executeSubCommand(params[0])) return false;
+
             return true;
         });
     }

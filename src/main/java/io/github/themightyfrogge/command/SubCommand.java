@@ -12,4 +12,10 @@ public @interface SubCommand {
      * @return The sub-command's handle (I.E. its name).
      */
     String handle();
+
+    /**
+     * Example: /command <string> <int> (What the player/console will see)
+     * @return The sub-command's syntax.
+     */
+    String syntax();
 }

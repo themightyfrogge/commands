@@ -2,6 +2,7 @@ package io.github.themightyfrogge.command;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,14 +20,14 @@ public class CommandManager {
      * A list of all the commands that can be executed.
      */
     private final List<Command> registeredCommands = new ArrayList<>();
+    private final JavaPlugin main;
 
     private static CommandManager instance;
-    private static JavaPlugin main;
 
-    public static void makeInstance(JavaPlugin plugin) {
-        if(instance != null) return;
-        instance = new CommandManager();
-        main = plugin;
+    // I used to use a makeInstance() method... Yeah, I don't know either how that thought came in mind when I already knew what constructors are...
+    public CommandManager(JavaPlugin main) {
+        if(instance == null) instance = this;
+        this.main = main;
     }
 
     public static CommandManager getInstance() {
@@ -48,12 +49,30 @@ public class CommandManager {
     /**
      * Finds commands & its sub-command methods and loads them...
      */
+    @SuppressWarnings("deprecation")
     public void loadCommands() {
-        for(Command command : getRegisteredCommands()) {
-            main.getCommand(command.getHandle()).setExecutor(command.getExecutor());
+        getRegisteredCommands().forEach(command -> {
+
+            // register command properies, if found. also add stuff to plugin.yml
+            if(command.getClass().isAnnotationPresent(CommandProperties.class)) {
+                command.setProperties(command.getClass().getAnnotation(CommandProperties.class));
+                String description = command.getProperties().description();
+                String usage = command.getProperties().usage();
+
+                main.getDescription().getCommands().put(
+                    command.getHandle(), 
+                    Map.of(
+                        "description", description.isEmpty() ? "No description" : description,
+                        "usage", usage.isEmpty() ? "/<command>" : usage 
+                    )
+                );
+            }
+
             command.getSubCommands().addAll(
-                ReflectionUtil.getAnnotatedMethods(command.getClass())
+                ReflectionUtil.getAnnotatedMethods(command.getClass(), SubCommand.class)
             );
-        }
+
+            main.getCommand(command.getHandle()).setExecutor(command.getExecutor());
+        });
     }
 }

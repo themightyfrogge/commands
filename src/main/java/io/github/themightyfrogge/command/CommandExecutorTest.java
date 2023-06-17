@@ -1,6 +1,7 @@
 package io.github.themightyfrogge.command;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandExecutorTest {
@@ -11,15 +12,14 @@ public class CommandExecutorTest {
      * @return If the executor is supposed to use the command.
      */
     private static boolean isCorrectExecutor(CommandSender sender, Command command) {
-        switch(command.getAllowedExecutor()) {
-            case ALL: return true;
+        switch(command.getProperties().allowedExecutor()) {
+            case ALL:
+                return true;
             case CONSOLE:
-                if(sender instanceof Player) return false;
-                return true;
+                return (sender instanceof ConsoleCommandSender);
             case PLAYER:
-                if(!(sender instanceof Player)) return false;
-                return true;
-            default: // I'm not exactly sure how that's possible, but sure...
+                return (sender instanceof Player);
+            default:
                 return false;
         }
     }

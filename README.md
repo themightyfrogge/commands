@@ -32,15 +32,15 @@ Maven users:
 ```xml
 <dependency>
     <groupId>com.github.themightyfrogge</groupId>
-	<artifactId>commands</artifactId>
-	<version>v0.1.0-ALPHA</version>
+    <artifactId>commands</artifactId>
+    <version>v0.1.1-ALPHA</version>
 </dependency>
 ```
 
 Gradle (Groovy) users:
 ```gradle
 dependencies {
-    implementation 'com.github.themightyfrogge:commands:v0.1.0-ALPHA'
+    implementation 'com.github.themightyfrogge:commands:v0.1.1-ALPHA'
 }
 ```
 
@@ -76,7 +76,7 @@ plugins {
 shadowJar {
     ...
     dependencies {
-        compile 'com.github.themightyfrogge:commands:v0.1.0-ALPHA'
+        compile 'com.github.themightyfrogge:commands:v0.1.1-ALPHA'
     }
     ...
 }
@@ -85,26 +85,26 @@ jar.finalizedBy(shadowJar)
 ```
 
 # Making the CommandManager instance
-In order for the command manager to work, you need to use ``CommandManager.makeInstance(/*Your main instance*/)`` in your onEnable() method.
+In order for the command manager to work, you need to make a ``CommandManager`` instance in your onEnable() method.
 For example:
 
 ```java
 // Inside onEnable()'s scope
-CommandManager.makeInstance(this);
+CommandManager commandManager = new CommandManager(this);
 ```
 
 # Making a Demo command!
-The demo command is also available in source in commands/plugincommands
 ```java
+@CommandProperties(allowedExecutor = CommandExecutorType.CONSOLE, usage = "/demo", description = "A simple demo command")
 public class DemoCommand extends Command {
 
     public DemoCommand() {
-        super("demo", "io.github.themightyfrogge.admin.demo", CommandExecutorType.CONSOLE);
+        super("demo", "frogge.admin.demo", CommandExecutorType.CONSOLE);
     }
 
     @Override
     public void execution() {
-        getSender().sendMessage("This is a demo for io.github.themightyfrogge's command manager!");
+        getSender().sendMessage("This is a demo for themightyfrogge's command manager!");
     }
     
     @SubCommand(handle = "info")
