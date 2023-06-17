@@ -99,7 +99,7 @@ CommandManager commandManager = new CommandManager(this);
 public class DemoCommand extends Command {
 
     public DemoCommand() {
-        super("demo", "frogge.admin.demo", CommandExecutorType.CONSOLE);
+        super("demo", "frogge.admin.demo");
     }
 
     @Override
