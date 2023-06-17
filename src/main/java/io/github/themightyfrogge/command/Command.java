@@ -43,8 +43,6 @@ public abstract class Command {
      * Contructs a basic command.
      * @param handle (I.E. the name of the command.)
      * @param permission (The permission required to run the command, which can be null.)
-     * @param max_arguments (The maximum amount of usable arguments.)
-     * @param allowedExecutor (The type of intended user.)
      */
     public Command(String handle, String permission) {
         this.handle = handle;
