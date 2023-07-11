@@ -5,17 +5,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)  
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface SubCommand {
+
     /**
      * @return The sub-command's handle (I.E. its name).
      */
     String handle();
 
     /**
+     * Not that useful, can be grabbed though.
+     * 
      * Example: /command <string> <int> (What the player/console will see)
      * @return The sub-command's syntax.
      */
-    String syntax();
+    String syntax() default "";
 }

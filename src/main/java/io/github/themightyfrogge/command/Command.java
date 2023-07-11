@@ -34,6 +34,7 @@ public abstract class Command {
 
     /** Sender, for access in sub-commands. */
     private CommandSender sender;
+    
     /** Parameters (I.E. Arguments) for access in sub-commands. */
     private String[] parameters;
 
@@ -54,6 +55,10 @@ public abstract class Command {
         
         this.executor = ((sender, command, label, params) -> {
             if(!CommandExecutorTest.performExecutorTest(sender, this)) return false; // If test is failed, we immediately stop the command execution.
+            
+            this.sender = sender;
+            this.parameters = params;
+            
             if(params.length == 0) { // If command is sent without arguments we invoke execution().
                 execution();
                 return true;

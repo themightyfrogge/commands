@@ -4,6 +4,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class CommandExecutorTest {
 
     /**
@@ -39,8 +41,11 @@ public class CommandExecutorTest {
     
     public static boolean performExecutorTest(CommandSender sender, Command command) {
         // Check if the user type is correct...
-        if(!isCorrectExecutor(sender, command)) return false;
-
+        if(!isCorrectExecutor(sender, command)) {
+            sender.sendMessage(ChatColor.RED + "Only " + command.getProperties().allowedExecutor().toString().toLowerCase() + "s can use this command!");
+            return false;
+        }
+        
         // If the user has passed first test, and is console, 
         // we stop; We don't want to cast sender to Player and make an  error.
         if(!(sender instanceof Player)) return true;

@@ -2,7 +2,6 @@ package io.github.themightyfrogge.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -49,23 +48,12 @@ public class CommandManager {
     /**
      * Finds commands & its sub-command methods and loads them...
      */
-    @SuppressWarnings("deprecation")
     public void loadCommands() {
         getRegisteredCommands().forEach(command -> {
 
             // register command properies, if found. also add stuff to plugin.yml
             if(command.getClass().isAnnotationPresent(CommandProperties.class)) {
                 command.setProperties(command.getClass().getAnnotation(CommandProperties.class));
-                String description = command.getProperties().description();
-                String usage = command.getProperties().usage();
-
-                main.getDescription().getCommands().put(
-                    command.getHandle(), 
-                    Map.of(
-                        "description", description.isEmpty() ? "No description" : description,
-                        "usage", usage.isEmpty() ? "/<command>" : usage 
-                    )
-                );
             }
 
             command.getSubCommands().addAll(

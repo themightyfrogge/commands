@@ -33,14 +33,14 @@ Maven users:
 <dependency>
     <groupId>com.github.themightyfrogge</groupId>
     <artifactId>commands</artifactId>
-    <version>0.1.2-ALPHA</version>
+    <version>0.1.3-ALPHA</version>
 </dependency>
 ```
 
 Gradle (Groovy) users:
 ```gradle
 dependencies {
-    implementation 'com.github.themightyfrogge:commands:0.1.2-ALPHA'
+    implementation 'com.github.themightyfrogge:commands:0.1.3-ALPHA'
 }
 ```
 
@@ -76,7 +76,7 @@ plugins {
 shadowJar {
     ...
     dependencies {
-        compile 'com.github.themightyfrogge:commands:0.1.2-ALPHA'
+        compile 'com.github.themightyfrogge:commands:0.1.3-ALPHA'
     }
     ...
 }
