@@ -30,7 +30,7 @@ public class CommandManager {
     }
 
     public static CommandManager getInstance() {
-        assert(instance != null); // If that happens, it means you haven't used makeInstance().
+        assert(instance != null);
         return instance;
     }
 
